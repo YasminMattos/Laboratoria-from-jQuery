@@ -1,4 +1,4 @@
-// Desaparecer span y aparecer popover cuano la tecla este en el input, submit deshabilitado
+// Declaración de variables
 $(document).ready(function(){
   var firstInput = $('#username');
   var secondInput = $('#password');
@@ -8,6 +8,7 @@ $(document).ready(function(){
   var thirdPopover = $('.span-3');
   var submitBtn = $('#submit');  
 
+// Muestra y oculta las notificaciones por cada input
   firstInput.on('click', function(){
     firstPopover.show();
   })
@@ -31,15 +32,31 @@ $(document).ready(function(){
       secondPopover.hide();
     }
   })
-  
-  submitBtn.on('click', function(){
-    if (secondInput.val() !== thirdInput.val()) {
-      alert('contraseña incorreta, vuelva a intentarlo');
-      // thirdInput.css('border', '1px solid red');
-      // $('.msg').show();
+
+  thirdInput.on('keyup', function(){
+    if (thirdInput.val().length > 6) {
+      thirdPopover.hide();
     }
   })
-  
-  
 
+  //Valida campos vacíos, contraseña incorrecta y campos de longs. menores.
+
+  submitBtn.on('click', function(){
+    if (secondInput.val() !== thirdInput.val()) {
+      thirdInput.css('outline', '1px solid red');
+      $('.msg').show();
+      $('input[type="submit"]').attr('disabled','disabled');
+    } else if (firstInput.val() == '' && secondInput.val() == '' && thirdInput.val() == ''){
+      $('input').css('outline', '1px solid red');
+      $('.msg').text('*Por favor, llena los campos').show();
+      $('input[type="submit"]').attr('disabled','disabled');
+    }
+  })
+
+  submitBtn.on('click', function(){
+    if (firstInput.val().length <= 3 && secondInput.val().length <= 6 && thirdInput.val().length <= 6){
+      $('input[type="submit"]').attr('disabled','disabled');
+    }
+
+  })
 });  
