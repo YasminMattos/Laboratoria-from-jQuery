@@ -34,7 +34,9 @@ $(document).ready(function(){
   
   submitBtn.on('click', function(){
     if (secondInput.val() !== thirdInput.val()) {
-      thirdInput.css('border', '1px solid red');
+      alert('contraseña incorreta, vuelva a intentarlo');
+      // thirdInput.css('border', '1px solid red');
+      // $('.msg').show();
     }
   })
   
